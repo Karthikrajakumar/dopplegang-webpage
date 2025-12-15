@@ -1,0 +1,1745 @@
+/* Professional CSS for Dopplegang prototype
+   - Place in src/styles.css
+   - Import once (e.g. in index.js): import "./styles.css";
+*/
+
+/* -------------------------
+   Global variables & fonts
+   ------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800;900&display=swap');
+
+:root{
+  /* Colors */
+  --bg-page: white;          /* page black */
+  --white: #ffffff;
+  --muted: #6b7280;
+  --accent-blue: #0a4bff;
+  --accent-blue-dark: #002077;
+  --purple-start: #7b3eff;
+  --purple-end: #3a1d8f;
+
+  --gutter: 24px;
+  --container-max: 1400px;  /* ✅ Max container width */
+
+  /* Typography */
+  --font-sans: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "KRON";
+  --h1-weight: 900;
+  --base-radius: 10px;
+
+  /* Elevation */
+  --shadow-1: 0 8px 20px rgba(2, 8, 25, 0.16);
+  --shadow-2: 0 28px 60px rgba(2, 8, 25, 0.35);
+}
+
+/* ✅ Responsive adjustments for different screen sizes */
+@media (max-width: 1600px) {
+  :root {
+    --gutter: 20px;
+  }
+}
+
+@media (max-width: 1200px) {
+  :root {
+    --gutter: 18px;
+    --container-max: 95%;
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --gutter: 16px;
+    --container-max: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --gutter: 12px;
+    --container-max: 85%;
+  }
+}
+
+*{box-sizing: border-box}
+html,body,#root{height:100%}
+body{
+  margin:0 auto;
+  background:var(--bg-page);
+  color:#0b0b0b;
+  font-family:var(--font-sans);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+  flex-grow: 1;
+}
+
+
+
+/* -------------------------
+   Utility / layout helpers
+   ------------------------- */
+.container{
+  width:100%;
+  max-width:var(--container-max);
+  margin:0 auto;
+  padding-left:var(--gutter);
+  padding-right:var(--gutter);
+  display: flex;
+}
+
+.row{display:flex;flex-wrap:wrap;gap:16px}
+.center{display:flex;align-items:center;justify-content:center}
+
+/* accessible focus style */
+:focus{outline:3px solid rgba(10,75,255,0.18); outline-offset:3px}
+
+/* small helpers */
+.hidden{display:none !important}
+.flex{display:flex}
+.mt-8{margin-top:8px}
+.mb-12{margin-bottom:12px}
+
+/* ---------------------------
+   Header: Figma / screenshot match
+   Replace current header rules with this
+   --------------------------- */
+
+
+
+/* inner container keeps header content aligned to page container */
+.header-inner{
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* brand left, nav right */
+  gap: 12px;
+  height: 64px;
+}
+
+.brand {
+  display: flex;              /* ✅ Forces horizontal alignment */
+  align-items: center;        /* ✅ Vertically centers logo + text */
+  gap: 12px;                  /* ✅ Space between logo & text */
+  position: relative;
+}
+
+/* LOGO */
+.logo-mark{
+  width: 48px;
+  height: 48px;
+  background-image: url("./assets/logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+  position: absolute;        /* ✅ NOT absolute */
+  left : 101px;
+  top: 26px;
+}
+
+/* BRAND TEXT */
+.brand-name {
+  font-family: 'KRON', 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 25px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  background: linear-gradient(180deg, #0033FF 0%, #0600AB 50%, #00033D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+
+  display: inline-block;
+
+  position: relative;
+  left: 164px;
+  top: 38px;
+}
+
+.brand-name-footer {
+  font-family: 'KRON', 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 25px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  background: linear-gradient(180deg, #0033FF 0%, #0600AB 50%, #00033D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-left: 32px;
+
+
+  display: inline-block;
+
+}
+
+
+/* Base nav item (Default state from Figma) */
+
+/* Add space between header menu titles */
+.nav {
+  display: flex;
+  gap: 36px;   /* adjust number to increase/decrease spacing */
+  align-items: center;
+  margin-top: 65px;
+
+}
+@media (max-width: 900px) {
+  .nav {
+    gap: 18px;   /* medium spacing */
+  }
+}
+
+.nav a {
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 20px;             /* Default (Figma) */
+  line-height: 30px;           /* Default (Figma) */
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #000000;              /* default black */
+  text-decoration: none;
+  transition: all 0.7s ease;
+}
+
+/* HOVER / ACTIVE / SELECTED — Figma "Variant2" */
+.nav a:hover,
+.nav a:focus,
+.nav a.active {
+  font-size: 22px;             /* Variant2 (Figma) */
+  line-height: 33px;           /* Variant2 (Figma) */
+
+  background: linear-gradient(180deg, #0033FF 0%, #0600AB 50%, #00033D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;          /* IMPORTANT: must be transparent for gradient */
+  transform: translateY(-1px);
+}
+
+/* Optional click effect */
+.nav a:active {
+  transform: translateY(0);
+}
+
+
+/* Optional small CTA pill next to nav (Contact) */
+.header-cta {
+  margin-left: 12px;
+  padding: 8px 14px;
+  background: linear-gradient(90deg,var(--accent-blue),var(--accent-blue-dark));
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 13px;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(10,75,255,0.12);
+}
+
+/* On narrow screens collapse nav to the right (you can replace with hamburger later) */
+@media (max-width: 900px) {
+  .header-inner { padding-left: 12px; padding-right: 12px; }
+  .nav { gap: 14px; font-size: 13px; }
+  .brand-name { font-size: 14px; }
+  .header-cta { display: none; } /* hide CTA if space is tight */
+}
+
+/* smaller phones: stack into two rows (logo left, menu below) */
+@media (max-width: 560px) {
+  .header-inner {
+    flex-wrap: wrap;
+    height: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    gap: 8px;
+  }
+  .nav {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 12px;
+    order: 2;
+    padding-bottom: 6px;
+  }
+}
+
+
+
+.laptop-wrap{
+  position:relative;
+  width:100%;
+  max-width:1200px;
+  margin: 0 auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:28px var(--gutter) 36px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+  .laptop-wrap {
+    max-width: 100%;
+    width: 100%;
+    padding: 20px var(--gutter) 28px;
+  }
+}
+
+@media (max-width: 900px) {
+  .laptop-wrap {
+    padding: 16px var(--gutter) 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .laptop-wrap {
+    padding: 12px var(--gutter) 16px;
+  }
+}
+
+.hero {
+  position: relative;
+  overflow: visible;
+  padding: 4rem 1rem;
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto; /* text and image */
+  align-items: center;
+  gap: 2rem;
+}
+
+/* hero left content */
+.hero-content{
+  position: relative;
+  left: -220px;  
+  top: 0;
+  z-index: 30;
+  padding: 0;
+  width: 100%;
+  height: auto;
+  line-height: 1.2;
+  font-weight: 900;
+}
+
+.hero-title{
+  color: #000;
+  font-family: Poppins;
+  font-size: clamp(32px, 6vw, 52px);
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1.2;
+  text-transform: uppercase;
+  margin: 0 0 24px 0;
+}
+
+.hero-title .accent{
+  color: #0033FF;
+  font-family: Poppins;
+  font-size: inherit;
+  font-style: normal;
+  font-weight: 900;
+  line-height: inherit;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .hero-title {
+    font-size: clamp(28px, 5vw, 42px);
+    margin-bottom: 20px;
+  }
+  .hero-content {
+    left: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-title {
+    font-size: clamp(24px, 4vw, 32px);
+    margin-bottom: 16px;
+  }
+  .hero-content {
+    left: 0;
+  }
+}
+
+@keyframes pulse-brightness {
+  0%   { filter: brightness(1.06); } /* slightly lighter than base */
+  50%  { filter: brightness(0.92); } /* slightly darker at midpoint */
+  100% { filter: brightness(1.06); } /* back to lighter */
+}
+
+.btn-contact{
+  width: 261px;
+  height: 44px;
+  border-radius: 37px;
+  padding: 7px 25.37px 7px 24px;
+  position: relative;
+
+  /* 🔹 Gradient setup: dark (left) → light (right) */
+  background-image: linear-gradient(
+    270deg,
+    #00033d 0%,
+    #0033ff 50%,
+    #00033d 100%
+  );
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  letter-spacing: 4px;
+  color: #ffffff;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  margin-top: 28px;
+  gap: 8px;
+
+  /* smooth animation both ways */
+  transition:
+    background-position 0.3s ease-in-out,
+    transform 0.6s ease;
+}
+
+/* Icon styling (Figma-based positioning) */
+.btn-contact-icon {
+  position: absolute;
+  height: 16.94px; /* EXACT icon size from Figma */
+
+  /* 🎯 Exact Figma alignment */
+  left: 84.29%;
+  top: calc(50% - 16.94px/2 + 0.47px);
+
+  pointer-events: none; /* avoids blocking button clicks */
+}
+
+.btn-contact:hover,
+.btn-contact:focus {
+  /* 🔁 Slide gradient so light side moves to the left */
+  background-position: 100% 50%;
+}
+
+.btn-contact:active {
+  transform: translateY(-4px);
+}
+
+
+
+/* Hero wrapper (no overlap with header) */
+.hero-outer {
+  position: relative;
+  margin: 0 auto;
+  margin-top: 60px;
+  padding: 80px var(--gutter) 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  max-width: var(--container-max);
+  width: 100%;
+  height: auto;
+  min-height: 650px;
+  box-sizing: border-box;
+  gap: 60px;
+}
+
+@media (max-width: 1200px) {
+  .hero-outer {
+    margin-top: 50px;
+    min-height: 550px;
+    padding: 60px var(--gutter) 60px;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-outer {
+    flex-direction: column;
+    margin-top: 40px;
+    min-height: 450px;
+    padding: 50px var(--gutter) 50px;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-outer {
+    margin-top: 30px;
+    min-height: auto;
+    padding: 40px var(--gutter) 40px;
+    gap: 20px;
+  }
+}
+
+
+/* BLUE ARC AS IMAGE – matches screenshot */
+.blue-arc-img {
+  position: absolute;
+  width: 110%;
+  height: 550px;
+  left: 50%;
+  bottom: -80px;
+  transform: translateX(-50%);
+  object-fit: contain;
+  background-image: url("./assets/blue-arc.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center bottom;
+
+  z-index: 5;
+  
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 1200px) {
+  .blue-arc-img {
+    height: 450px;
+    bottom: -40px;
+  }
+}
+
+@media (max-width: 900px) {
+  .blue-arc-img {
+    height: 350px;
+    width: 100%;
+    bottom: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .blue-arc-img {
+    height: 250px;
+    bottom: 20px;
+  }
+}
+
+/* If you absolutely need the arc as background behind text, position it */
+.hero .hero-arc--absolute {
+  position: absolute;
+  right: clamp(10px, 3vw, 60px);
+  top: clamp(10px, 8vh, 80px);
+  transform: translateZ(0);
+  z-index: 0;
+}
+
+
+/* LEFT TOWER IMAGE */
+.tower-img {
+  position: absolute;
+  left: 29%;              /* Adjust tower X-position */
+  bottom: -30px;          /* Adjust height to match screenshot */
+  height: 580px;         /* Resize tower */
+  z-index: 35;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 18px 28px rgba(0,0,0,0.3));
+}
+.tower2-img {
+  position: absolute;
+  left: 80%;              /* Adjust tower X-position */
+  bottom: 1px;          /* Adjust height to match screenshot */
+  height: 450px;         /* Resize tower */
+  z-index: 35;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 18px 28px rgba(0,0,0,0.3));
+}
+/* Adjust on smaller screens */ 
+@media (max-width: 900px) {
+  .tower-img {
+    height: 340px;
+    left: -50%;
+    bottom: 10px;
+  }
+}
+
+@media (max-width: 760px) {
+  .tower-img {
+    display: none; /* tower hidden on very small screens */
+  }
+}
+
+
+/* cctv image */
+.cctv-img{
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+  object-fit: contain;
+  z-index: 40;
+  pointer-events: none;
+  margin: 0 0 0 auto;
+  right: -80px;
+}
+
+.hero-content {
+  order: 1;
+}
+
+.cctv-img {
+  order: 2;
+}
+
+/* small devices: collapse */
+@media (max-width:1100px){
+  .hero-title{ font-size:42px }
+  .cctv-img{ max-width: 400px; }
+  .hero-canvas{ height:520px }
+  .hero-content{ position: relative; left: 0; top: 0; max-width: 100%; height: auto; padding: 0; order: 1; }
+}
+@media (max-width:900px){
+  .cctv-img{ order: 2; }
+  .hero-content { order: 1; }
+}
+@media (max-width:760px){
+  .hero-title{ font-size:28px; }
+  .cctv-img{ max-width: 300px; order: 2; }
+  .hero-canvas{ height:420px; border-radius:12px; }
+  .hero-content{ left:0; top:0; max-width:100%; height: auto; padding: 0; order: 1; }
+  .nav{ display:none } /* mobile nav should be a hamburger in production */
+}
+
+
+
+/* About-us Title */
+
+.section-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 45px;
+  line-height: 85px;
+  text-transform: uppercase;
+  text-align: center;
+
+  /* Figma gradient text */
+  background: linear-gradient(180deg, #0033FF 0%, #0600AB 50%, #00033D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+
+  margin: 0 auto 20px auto;  /* centers + adds spacing */
+  width: fit-content;        /* keeps width tight to content */
+}
+
+
+/* ===== Mission Title (Figma Gradient Text) ===== */
+
+.mission-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 45px;
+  line-height: 85px;
+  text-transform: uppercase;
+  text-align: center;
+
+  /* Figma gradient text */
+  background: linear-gradient(180deg, #0033FF 0%, #0600AB 50%, #00033D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+
+  margin: 0 auto 20px auto;  /* centers + adds spacing */
+  width: fit-content;        /* keeps width tight to content */
+}
+
+
+/* ===== Vision Title (Figma Gradient Text) ===== */
+
+.vision-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 45px;
+  line-height: 85px;
+  text-transform: uppercase;
+  text-align: center;
+
+  /* Gradient text — exactly like your Figma code */
+  background: linear-gradient(180deg, #0033FF 0%, #0600AB 50%, #00033D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;  /* required for non-webkit browsers */
+
+  margin: 0 auto 20px auto; /* center + spacing */
+  width: fit-content;  
+  margin: 20px auto;     /* only take space required */
+}
+
+
+
+.section-sub{
+  text-align:center;
+  color:var(--muted);
+  margin-bottom:5px;
+  max-width:900px;
+  margin-left:auto;
+  margin-right:auto;
+  font-size: 20px;
+  
+}
+
+:root{
+  --card-radius: 12px;
+  --card-bg: #f3f6fb;
+  --card-inner-bg: #ffffff;
+  --accent-blue-dark: #0b2b9c;
+  /* responsive card height: min 640px, preferred ~40vh, max 520px */
+  --card-height: clamp(640px, 40vh, 520px);
+}
+
+/* -------------------------
+   Products grid
+   ------------------------- */
+.products-wrapper{
+  max-width:var(--container-max);
+  margin:48px auto;
+  padding:0 var(--gutter);
+  color:#0b0b0b;
+}
+
+/* ---------- PRODUCT GRID (3×3 responsive) ---------- */
+
+.products-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 1rem 0;
+}
+
+@media (max-width: 1100px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- PRODUCT CARD ---------- */
+
+.prod-card {
+  background: #eaecf1;   /* ✔ light grey-blue background (matches Figma) */
+  border-radius: 16px;    /* ✔ smooth rounded corners */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-color: 0px 4px 14px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 12px 32px rgba(0, 0, 0, 0.08), 0px 2px 6px rgba(0, 0, 0, 0.5);
+  height: clamp(660px, 42vh, 520px);         /* equal height */
+  
+}
+
+
+
+/* ---------- IMAGE (NO OUTER CONTAINER) ---------- */
+
+.prod-thumb {
+  padding: 32px;       /* ✔ spacing around image (no white inset box anymore) */
+}
+
+.prod-thumb img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 12px;  /* ✔ soft corner radius like screenshot */
+}
+
+/* ---------- TEXT SECTION ---------- */
+
+.prod-body {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+/* TITLE */
+.prod-body h3 {
+  margin: 0;
+  font-size: clamp(1.05rem, 0.9rem + 0.8vw, 1.25rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #112a6b;      /* ✔ Dark navy (matches screenshot exactly) */
+  letter-spacing: 0.4px;
+}
+
+/* BULLET LIST WITH LINE CLAMP */
+.prod-body ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: clamp(0.9rem, 0.85rem + 0.4vw, 1rem);
+  line-height: 1.55;
+  color: #4b5563;      /* ✔ soft grey as in screenshot */
+  list-style-type: disc;
+
+  /* line clamp for equal height cards */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;          /* visible lines (tweak this number) */
+  line-clamp: 6;
+  overflow: hidden;
+}
+
+
+/* BULLETS — use line-clamp to restrict visible lines so the cards stay visually equal.
+   Adjust -webkit-line-clamp to control how many lines are visible. */
+.prod-list {
+  margin: 0;
+  padding-left: 1.05rem;
+  color: #47525d;
+  line-height: 1.6;
+  font-size: clamp(0.86rem, 0.82rem + 0.45vw, 1rem);
+  font-weight: 500;
+
+  display: -webkit-box;            /* required for line-clamp */
+  -webkit-box-orient: vertical;    /* required for line-clamp */
+  -webkit-line-clamp: 6;           /* visible lines (tweak this number) */
+  line-clamp: 6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* If you prefer EXACT number of bullet lines across cards, reduce clamp number (e.g. 4 or 5).
+   Note: the visible number depends on font-size and line-height, so you may tune them. */
+
+/* Optional: if you want a small "more" fade at the bottom of the list, add a gradient overlay */
+.prod-list::after {
+  content: "";
+  display: block;
+  height: 36px;
+  margin-top: -36px;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(243,246,251,0) 0%, rgba(243,246,251,1) 100%);
+}
+
+/* Accessibility / small-screen tweaks */
+@media (max-width: 420px) {
+  :root { --card-height: 420px; } /* reduce card height on tiny screens */
+  .prod-title { font-size: 1rem; }
+  .prod-list { -webkit-line-clamp: 8; line-clamp: 8; } /* let a few more lines show on taller small-screen cards */
+}
+
+
+
+
+/* Section heading tweak to match Figma */
+.section-title {
+  color: var(--accent-blue);
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 1px;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+.section-sub {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 22px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- Figma-style Brand Rolls ---------- */
+
+/* wrapper for the whole brands page area */
+.brands-page {
+  max-width: var(--container-max);
+  margin: 32px auto;
+  padding: 0 var(--gutter);
+  text-align: center;
+}
+
+/* container for each roll group (the Figma boxes that read "BRAND ROLL 22" etc) */
+.brand-roll {
+  margin: 28px 0;
+  text-align: left;
+}
+
+/* roll title (like "BRAND ROLL 22") and optional small subtitle */
+.brand-roll__title {
+  display:block;
+  font-weight:800;
+  color: var(--accent-blue);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* the visible white canvas area that holds multiple rolls horizontally on large screens */
+.brand-rolls-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns matching your Figma screenshot */
+  gap: 28px;
+  align-items: start;
+}
+
+/* a single roll box (the column containing many pill cards) */
+.brand-column {
+  background: transparent;
+  padding: 12px 8px;
+  display:flex;
+  flex-direction:column;
+  gap: 18px;
+}
+
+/* inner grid of pill cards in one roll */
+.brand-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* two columns inside a roll column, like stacked pairs */
+  gap: 14px;
+}
+
+/* pill card that houses the logo */
+.brand-pill {
+  height: 64px;
+  background: #E9E9EA;           /* soft grey pill background */
+  border-radius: 10px;
+  border: 1px solid rgba(2,8,25,0.04);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 10px;
+  box-shadow: 0 6px 16px rgba(2,8,25,0.04);
+}
+
+/* logo */
+.brand-pill img {
+  max-width: 85%;
+  max-height: 86%;
+  object-fit: contain;
+  display:block;
+}
+
+/* small label under the roll (optional) */
+.brand-roll__subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* responsive: fewer columns across the whole area */
+@media (max-width: 1200px) {
+  .brand-rolls-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .brand-grid { grid-template-columns: repeat(3, 1fr); } /* make pills tighter inside */
+}
+@media (max-width: 760px) {
+  .brand-rolls-grid { grid-template-columns: 1fr; }
+  .brand-grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .brand-pill { height: 56px; border-radius: 8px; }
+}
+
+/* ============================
+   Contact page — Figma exact
+   Append/replace contact rules in styles.css
+   ============================ */
+
+/* page wrapper */
+.contact-wrapper {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  padding: 140px 20px 160px; /* room for big bg text + form */
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+/* decorative blurred ellipses (3 on large viewport + one bottom) */
+/* these are purely visual & positioned absolute relative to .contact-wrapper */
+.contact-wrapper .contact-blob {
+  position: absolute;
+  width: 356.5px;
+  height: 666px;
+  background: linear-gradient(180deg, #0033FF 0%, #00197f 60%);
+  filter: blur(250px);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* left large blob (Figma: left -161px, top 712px relative to artboard) */
+.contact-wrapper .blob-left-1 { left: -160px; top: 72px; transform: none; }
+
+/* left top small blob (Figma: left -114px, top -372px) */
+.contact-wrapper .blob-left-2 { left: -114px; top: -372px; transform: none; }
+
+/* right blob mirror (Figma: left 1488px, top 379px with flip) */
+.contact-wrapper .blob-right-1 { right: -120px; top: 40px; transform: scaleX(-1); }
+
+/* right bottom blob (Ellipse 5) */
+.contact-wrapper .blob-right-2 { right: -140px; top: 540px; transform: scaleX(-1); }
+
+/* Large faded background brand text */
+.contact-wrapper .bg-brand {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 200px;       /* Figma: 200px */
+  line-height: 300px;
+  letter-spacing: -4px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  pointer-events: none;
+  color: transparent;
+  background: linear-gradient(171.07deg, rgba(0,51,255,0.20) 37.61%, rgba(0,31,153,0) 86.07%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 1;
+  filter: blur(0.2px);
+}
+
+/* Contact title & subtitle (kept above bg) */
+.contact-wrapper .section-title.big {
+  position: relative;
+  z-index: 5;
+  margin: 0 auto 6px;
+  font-size: 45px;
+  line-height: 68px;
+  font-weight: 900;
+  color: rgba(0,0,0,0.7);
+  text-align: center;
+}
+
+.contact-wrapper .section-sub {
+  position: relative;
+  z-index: 5;
+  margin: 0 auto 28px;
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.51);
+  letter-spacing: 0.17em;
+  text-transform: none;
+}
+
+/* ===== CENTERED FORM CARD (733px) ===== */
+.contact-card {
+  position: relative;
+  z-index: 6; /* above blobs & bg-brand */
+  width: 733px;                /* exact width from Figma */
+  max-width: calc(100% - 48px);
+  margin: 28px auto 8px auto;
+  padding: 22px;
+  box-sizing: border-box;
+
+ 
+  backdrop-filter: none; /* keep subtle */
+  display: block;
+}
+
+/* Individual input frames (exact 57px height) */
+/* We'll style them as single inputs inside the card to match Figma frames */
+.contact-card .form-row {
+  width: 100%;
+  margin: 20px 0 0 0;
+  color: rgba(0, 0, 0, 0.40);
+font-family: Poppins;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+/* single-line inputs */
+.contact-card input[type="text"],
+.contact-card input[type="email"],
+.contact-card input[type="tel"] {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 733px;              /* Figma: 707px */
+  height: 57px;                      /* exact height */
+  padding: 14px 13px 13px;
+  border-radius: 20px;
+  border: 1px solid rgba(0,0,0,0.6);
+  background: rgba(255,255,255,0.10); /* readable input background */
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  color: rgba(0,0,0,0.9);
+  outline: none;
+  display: block;
+  line-height: 57px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* placeholder styling to match Figma subtle gray */
+.contact-card input::placeholder {
+  color: rgba(0,0,0,0.40);
+font-family: Poppins;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+width: 100%;
+
+}
+
+/* Big textarea box (Frame 22) */
+.contact-card textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 733px;              /* Figma: 733px */
+  min-height: 259px;                /* Figma: 259px */
+  padding: 12px 545px 217px 13px;
+  border-radius: 20px;
+  border: 1px solid rgba(0,0,0,0.6);
+  background: rgba(255,255,255,0.10);
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  color: rgba(0,0,0,0.9);
+  resize: vertical;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* textarea placeholder style */
+.contact-card textarea::placeholder {
+  color: rgba(0,0,0,0.40);
+font-family: Poppins;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+/* Submit button wrapper to match absolute placement in Figma (but centered) */
+.contact-card .submit-wrap {
+  margin-top: 18px;
+  text-align: center;
+}
+
+/* Uniform focus highlight for ALL form fields */
+.contact-card input:focus,
+.contact-card textarea:focus {
+  outline: none !important;
+  border-color: #0033FF;
+  box-shadow: 0 0 0 3px rgba(0, 51, 255, 0.25); /* blue glow */
+}
+
+.btn-submit {
+  display: flex;
+  width: calc(100% - -45px);
+  max-width: auto;
+  min-height: 48px;
+  padding: 8px 0 7px 0;
+  justify-content: center;
+  align-items: center;
+  margin-top: 18px;
+
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.43);
+
+  /* Default horizontal gradient */
+  background: linear-gradient(90deg, #021650 0%, #0033FF 100%);
+
+  backdrop-filter: blur(30px);
+  cursor: pointer;
+
+  /* Text */
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(18px, 4vw, 24px);
+  font-weight: 500;
+  text-transform: uppercase;
+
+  /* Quick transition */
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover state */
+.btn-submit:hover {
+  background: linear-gradient(180deg, #011143 0%, #0033FF 100%);
+}
+
+/* Click effect */
+.btn-submit:active {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+  .btn-submit {
+    width: calc(100% - 30px);
+    font-size: clamp(16px, 3.5vw, 20px);
+  }
+}
+
+@media (max-width: 600px) {
+  .btn-submit {
+    width: calc(100% - 26px);
+    font-size: clamp(14px, 3vw, 18px);
+    padding: 6px 0 5px 0;
+  }
+}
+
+
+/* Contact details below the card */
+.contact-details {
+  margin: 18px auto 0;
+  max-width: 760px;
+  z-index: 6;
+  text-align: center;
+  color: rgba(0,0,0,0.8);
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* small responsive adjustments to match mobile view */
+@media (max-width: 920px) {
+  .contact-wrapper { padding: 80px 18px 120px; }
+  .contact-wrapper .bg-brand { font-size: 120px; line-height: 160px; left: 50%; transform: translateX(-50%); top: 10px; }
+  .contact-card { width: 92%; padding: 15px; border-radius: 10px; }
+  .contact-card input[type="text"],
+  .contact-card input[type="email"],
+  .contact-card input[type="tel"] { height: 50px; font-size: 18px; }
+  .contact-card textarea { min-height: 180px; font-size: 16px; }
+  .btn-submit { height: 48px; font-size: 20px; }
+  .contact-wrapper .contact-blob { display: none; } /* hide heavy blurs on mobile for perf */
+}
+
+@media (max-width: 480px) {
+  .contact-wrapper .bg-brand { display: none; } /* hide huge background text on small phones */
+  .contact-details { padding: 0 12px; font-size: 14px; }
+}
+
+
+/* ---------- Footer: 3-column layout like screenshot ---------- */
+.site-footer {
+  background: #ffffff;
+  color: #0b0b0b;
+  padding: 56px 0 72px;
+  border-top: 1px solid rgba(2,8,25,0.03);
+  box-sizing: border-box;
+}
+
+/* grid container that centers content and creates three columns */
+.footer-inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: grid;
+  grid-template-columns: 1fr 420px 1fr; /* left / center / right */
+  gap: 40px;
+  align-items: start;
+}
+
+/* ---------- Left: Brand + Social ---------- */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+/* Big gradient brand name (matches header style) */
+.footer-brand .brand-name {
+  font-family: 'KRON', 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 36px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0;
+  background: linear-gradient(180deg, #0033FF 0%, #0600AB 50%, #00033D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.footer-social {
+  display: flex !important;          /* horizontal layout */
+  flex-direction: row !important;    /* keep all icons in one row */
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 3px !important;              /* spacing between icons */
+  width: 100%;
+  padding-left: 38px;
+}
+
+/* Social icon images inside footer */
+.footer-social img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+ 
+   
+  
+
+}
+
+/* Social tile container already exists, but ensure proper alignment */
+.footer-social .social-link {
+ width: 40px;
+  height: 40px;
+  display: flex !important;          /* make each icon a centered tile */
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  gap: 30px;
+  box-shadow: 0 8px 20px rgba(232, 233, 236, 0.12);
+  
+}
+
+
+/* Add small white inner border look */
+.footer-social .social-link::after {
+  content: '';
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.12);
+  pointer-events: none;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 30px; /* adjust spacing as you like */
+}
+
+/* ---------- Center: Vertical Navigation (OUR PAGE) ---------- */
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.footer-nav .nav-title {
+  font-size: 20px;
+  font-weight: 900;
+  margin-bottom: 10px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.footer-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 18px;
+}
+
+.footer-nav ul li a {
+  color: #111827;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.6px;
+}
+
+/* ---------- Right: Contact details with icons ---------- */
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+  font-weight: 200;
+}
+
+.footer-contact .contact-title {
+  font-size: 20px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+/* one row per contact item */
+.contact-item {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  font-weight: 500;
+  color: #111827;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+/* small circular icon container */
+.contact-item .ci-icon img {
+   width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: block;
+  filter: brightness(0);
+}
+
+/* address text allowed to wrap but keep bold */
+.contact-item.address {
+  max-width: 520px;
+  font-weight: 500;
+}
+
+/* ---------- Footer bottom tiny copyright row (optional) ---------- */
+.footer-bottom {
+  margin-top: 28px;
+  text-align: center;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* ---------- Responsive: stack columns under 980px ---------- */
+@media (max-width: 980px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    text-align: center;
+  }
+  .footer-brand, .footer-nav, .footer-contact {
+    align-items: center;
+  }
+  .footer-nav ul { gap: 14px; }
+  .footer-contact .contact-item { justify-content: center; }
+  .contact-item.address { max-width: 100%; }
+}
+
+/* small phones: slightly smaller brand */
+@media (max-width: 480px) {
+  .footer-brand .brand-name { font-size: 28px; }
+  .footer-social .social-link { width: 36px; height: 36px; font-size: 16px; }
+}
+
+
+/* -------------------------
+   Motion accessibility
+   ------------------------- */
+@media (prefers-reduced-motion: reduce){
+  *{ transition:none !important; animation:none !important; }
+}
+
+/* Smooth scroll for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent fixed header overlap when scrolling to sections */
+#hero,
+#about,
+#products,
+#brands,
+#contact {
+  scroll-margin-top: 100px;
+}
+
+
+/* ---------- About Us Parent Wrapper ---------- */
+.about-wrapper {
+  max-width: var(--container-max);
+  margin: 200px auto 0 auto;   /* ✅ Increased top margin to prevent collision with blue arc */
+  padding: 0 var(--gutter);
+  color: #000;
+  padding-top: 60px;           /* ✅ Added top padding for breathing room */
+}
+
+@media (max-width: 1200px) {
+  .about-wrapper {
+    margin-top: 150px;
+    padding-top: 50px;
+  }
+}
+
+@media (max-width: 900px) {
+  .about-wrapper {
+    margin-top: 120px;
+    padding-top: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-wrapper {
+    margin-top: 100px;
+    padding-top: 30px;
+  }
+}
+
+/* ---------- Section Common Text ---------- */
+.about-text {
+  text-align: center;
+  color: #000;
+  max-width: 800px;
+  margin: 0 auto 32px;
+  line-height: 1.8;
+  font-weight: 550;
+  text-transform: capitalize;
+}
+
+/* ============================================
+   MISSION ROW (image LEFT, text RIGHT)
+   ============================================ */
+.about-mission-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  margin: 80px 0;
+}
+
+.mission-img {
+  width: 520px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.mission-box {
+  max-width: 500px;
+  text-align: left;
+  color: var(--muted);
+}
+
+/* ============================================
+   VISION ROW (text LEFT, image RIGHT)
+   ============================================ */
+.vision-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  margin: 120px 0 60px 0;
+}
+
+.vision-text {
+  max-width: 500px;
+  text-align: left;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.vision-image {
+  width: 520px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---------- Responsive Fixes ---------- */
+@media (max-width: 900px) {
+  .about-mission-row,
+  .vision-row {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .mission-box,
+  .vision-text {
+    text-align: center;
+  }
+
+  .mission-img,
+  .vision-image {
+    width: 90%;
+  }
+}
+
+
+
+/* ---------- Feature Icons Row (above Products) ---------- */
+
+.features-row {
+  max-width: var(--container-max);
+  margin: 250px auto 44px auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 28px;
+  width: 100%;
+  align-items: start;
+}
+
+.feature-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 6px 4px;
+}
+
+.feature-icon {
+  width: 72px;
+  height: 72px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background-color: white;
+  
+}
+
+.feature-icon img {
+  width: 79px;
+  margin-top: -50px;
+  height: 122px;
+  object-fit: contain;
+  display: block;
+ 
+   /* keep native color if icons are blue; change here if you use SVG + currentColor */
+}
+
+/* Fix only the FIRST feature icon size */
+.features-grid .feature-tile:first-child .feature-icon img {
+  width: 55px;
+  height: 85px;
+  margin-top: -40px;
+  object-fit: contain;
+}
+
+
+
+/* title */
+.feature-title {
+  font-size:  clamp(0.95rem, 0.85rem + 0.9vw, 1.15rem); /* scales */;
+  font-weight: 700;
+  color: var(--accent-black);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;  
+  line-height: 0.5;
+}
+
+/* subtitle - small line under title */
+.feature-sub {
+  font-size:  clamp(0.95rem, 0.85rem + 0.9vw, 1.15rem); /* scales */;
+  font-weight: 700;
+  color: var(--accent-black);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  line-height: 0.5;
+}
+
+/* subtitle - small line under title */
+.feature-sub1 {
+  font-size:  clamp(0.95rem, 0.85rem + 0.9vw, 1.15rem); /* scales */;
+  font-weight: 700;
+  color: var(--accent-black);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  line-height: 0.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1100px) {
+  .features-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+}
+@media (max-width: 760px) {
+  .features-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .feature-icon { width: 64px; height: 64px; border-radius: 14px; }
+  .feature-icon img { width: 38px; height: 38px; }
+}
+
+
+/* -------------------------
+   Brand carousel — CSS Marquee
+   Append to styles.css
+   ------------------------- */
+
+.brand-carousel {
+  width: 100%;
+  overflow: hidden;
+  padding: 18px 0;
+  background: transparent;
+  box-sizing: border-box;
+  /* visually match your design */
+  border-radius: 8px;
+}
+
+.brand-track {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  /* duplicate content technique: animation moves -50% so second copy follows */
+  animation: brand-marquee 22s linear infinite;
+  will-change: transform;
+}
+
+.brand-track:hover {
+  animation-play-state: running; /* pause on hover */
+}
+
+.brand-item {
+  flex: 0 0 auto;
+  width: 238px; /* matches your frame width from Figma */
+  height: 127px; /* matches frame height */
+  background: #DBDBDB;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+}
+
+/* inside the card: keep logo centered and constrained */
+.brand-item img {
+  max-width: 85%;
+  max-height: 80%;
+  object-fit: contain;
+  display: block;
+}
+
+/* marquee animation — adjust duration to speed up/slow down */
+@keyframes brand-marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* -50% because we duplicate content once */
+}
+
+/* small screens: make cards smaller */
+@media (max-width: 900px) {
+  .brand-item { width: 180px; height: 96px; }
+  .brand-track { gap: 12px; }
+}
+
+
+
+
+
+
+
+
+
+
+

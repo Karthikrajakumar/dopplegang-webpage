@@ -1,0 +1,43 @@
+// Example: src/components/MissionVision.jsx
+import React from "react";
+import bigTelescope from "../assets/mission-illustration.png"; // your big telescope image
+import gearScene from "../assets/vision-illustration.png";         // the gear/team small illustration
+
+export default function MissionVision() {
+  return (
+    <section className="mission-vision-section" aria-labelledby="mission-vision-heading">
+      <div className="mission-vision-grid">
+
+        {/* top-left small illustration */}
+        <div className="mv-thumb">
+          <img src={gearScene} alt="Team working on product/gear" loading="lazy" />
+        </div>
+
+        {/* top-right mission text */}
+        <div className="mv-mission">
+          <h3 className="section-title">MISSION</h3>
+          <p>
+            To be a customer-convenient team. With the help of technology we make our customers feel safe.
+            To be the most successful and customer-convenient company in our sector.
+          </p>
+        </div>
+
+        {/* bottom-left vision heading + paragraph */}
+        <div className="mv-vision">
+          <h3 className="section-title">VISION</h3>
+          <p className="vision-paragraph">
+            By implementing powerful research and development capabilities, we want to become the best
+            organization and technology provider, providing clients with new technology and innovative
+            business solutions.
+          </p>
+        </div>
+
+        {/* bottom-right big telescope illustration */}
+        <div className="mv-bigimage">
+          <img src={bigTelescope} alt="Vision telescope illustration" loading="lazy" />
+        </div>
+
+      </div>
+    </section>
+  );
+}

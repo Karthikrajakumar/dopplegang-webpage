@@ -1,0 +1,119 @@
+/* src/components/brands.css
+   Moving marquee for 4 unique rows + centered title
+*/
+
+/* Section wrapper (title centered) */
+.brands-page {
+  max-width: 1220px;
+  margin: 40px auto 64px;
+  padding: 0 28px;
+  text-align: center; /* ensures title centered */
+}
+
+.section-title {
+  font-family: 'KRON', 'Poppins', sans-serif;
+  font-weight: 900;
+  color: #0033ff;
+  font-size: 28px;
+  letter-spacing: 1px;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+
+.section-sub {
+  margin: 0 auto 28px;
+  color: #6b7280;
+  max-width: 900px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* container for all rows */
+.brand-roll {
+  display: grid;
+  grid-auto-rows: min-content;
+  gap: 18px;
+  width: 100%;
+}
+
+/* each marquee row viewport */
+.brand-row {
+  position: relative;
+  width: 100%;
+  height: 127px;         /* pill height per design */
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+/* moving track (duplicated items inside) */
+.brand-track {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 100%;
+  width: max-content;
+  animation-name: brand-marquee;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+  /* animation-duration & animation-direction supplied inline from JSX */
+}
+
+/* pause on hover/focus */
+.brand-row:hover .brand-track,
+.brand-row:focus-within .brand-track {
+  animation-play-state: running;
+}
+
+/* card / pill containing logo */
+.brand-item {
+  flex: 0 0 auto;
+  width: 238px;          /* pill width */
+  height: 127px;         /* pill height */
+  border-radius: 12px;
+  background: #DBDBDB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 42px;
+  box-sizing: border-box;
+  box-shadow: 0 6px 14px rgba(2,8,40,0.06);
+  border: 1px solid rgba(2,8,40,0.04);
+}
+
+/* image sizing inside pill */
+.brand-item img {
+  max-width: 85%;
+  max-height: 70%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+/* marquee animation:
+   Because each row duplicates its logos in JSX, translating -50% loops seamlessly.
+*/
+@keyframes brand-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Responsive: switch columns per row visually (track still scrolls) */
+@media (max-width: 1200px) {
+  .brand-item { width: 200px; height: 110px; }
+  .brand-row { height: 110px; }
+}
+
+@media (max-width: 900px) {
+  .brand-item { width: 160px; height: 92px; padding: 10px; }
+  .brand-row { height: 92px; }
+  .section-sub { max-width: 640px; font-size: 13px; }
+}
+
+@media (max-width: 560px) {
+  .brand-item { width: 140px; height: 76px; }
+  .brand-row { height: 76px; gap: 12px; }
+  .brands-page { padding: 0 16px; }
+}
