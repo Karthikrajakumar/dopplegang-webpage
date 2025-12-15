@@ -136,7 +136,7 @@ body{
   background-position: center;
   flex-shrink: 0;
   position: absolute;        /* ✅ NOT absolute */
-  left : 101px;
+  left : 45px;
   top: 26px;
 }
 
@@ -158,8 +158,8 @@ body{
   display: inline-block;
 
   position: relative;
-  left: 164px;
-  top: 38px;
+  left: 110px;
+  top: 33px;
 }
 
 .brand-name-footer {
@@ -174,7 +174,7 @@ body{
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-left: 32px;
+  margin: 0 0 14px 0;
 
 
   display: inline-block;
@@ -1272,12 +1272,13 @@ line-height: normal;
   font-size: 36px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  margin: 0;
+  margin: 0 0 14px 0;
   background: linear-gradient(180deg, #0033FF 0%, #0600AB 50%, #00033D 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
+  
 }
 
 .footer-social {
@@ -1287,7 +1288,8 @@ line-height: normal;
   justify-content: flex-start !important;
   gap: 3px !important;              /* spacing between icons */
   width: 100%;
-  padding-left: 38px;
+  padding-left: 5px auto;
+  
 }
 
 /* Social icon images inside footer */
