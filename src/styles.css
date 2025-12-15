@@ -174,12 +174,19 @@ body{
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+
+  display: block;
+  text-align: center;
   margin: 0 0 14px 0;
 
-
-  display: inline-block;
-
 }
+
+.footer-brand-social {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 
 
 /* Base nav item (Default state from Figma) */

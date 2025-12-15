@@ -18,7 +18,6 @@ export default function App() {
     <div className="app-root">
       <Header />
       <Hero />
-      
       <AboutUs />
       <Features />
       <Products />
