@@ -9,7 +9,7 @@ export default function Contact() {
   });
 
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState(null); // success | error | null
+  const [formStatus, setFormStatus] = useState(null); // success | error | null
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,8 +22,7 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setStatus(null);
-    
+    setFormStatus(null);
 
     try {
       const res = await fetch(
@@ -38,7 +37,7 @@ export default function Contact() {
       const data = await res.json();
 
       if (res.ok && data.success) {
-        setStatus("success");
+        setFormStatus("success");
         setFormData({
           name: "",
           email: "",
@@ -46,11 +45,11 @@ export default function Contact() {
           message: "",
         });
       } else {
-        setStatus("error");
+        setFormStatus("error");
       }
     } catch (err) {
       console.error(err);
-      setStatus("error");
+      setFormStatus("error");
     } finally {
       setLoading(false);
     }
@@ -58,73 +57,60 @@ export default function Contact() {
 
   return (
     <div className="contact-wrapper" id="contact">
-      <h2
-        style={{
-          color: "rgba(0, 0, 0, 0.70)",
-          WebkitTextStrokeWidth: "1px",
-          WebkitTextStrokeColor: "rgba(0, 0, 0, 0.43)",
-          fontFamily: "Poppins",
-          fontSize: "45px",
-          fontWeight: 900,
-          textAlign: "center",
-        }}
-      >
-        CONTACT US
-      </h2>
+      {/* Blur Ellipses */}
+      <span className="contact-ellipse e2"></span>
+      <span className="contact-ellipse e3"></span>
+      <span className="contact-ellipse e4"></span>
+      <span className="contact-ellipse e5"></span>
 
-      <p className="section-sub">Get In Touch With Our Details</p>
+      {/* Background Brand */}
+      <h1 className="contact-bg-brand">DOPPELGANG</h1>
+
+      <h2 className="contact-title">CONTACT US</h2>
+      <p className="contact-subtitle">Get In Touch With Our Details</p>
 
       <div className="contact-card">
         <form className="contact-form" onSubmit={handleSubmit}>
-          <div className="form-row">
-            <input
-              type="text"
-              placeholder="Your Name"
-              name="name"
-              required
-              value={formData.name}
-              onChange={handleChange}
-            />
-          </div>
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
 
-          <div className="form-row">
-            <input
-              type="email"
-              placeholder="Your Email"
-              name="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </div>
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
 
-          <div className="form-row">
-            <input
-              type="text"
-              placeholder="Your Number"
-              name="phone"
-              required
-              value={formData.phone}
-              onChange={handleChange}
-            />
-          </div>
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Your Number"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+          />
 
-          <div className="form-row">
-            <textarea
-              placeholder="Additional Details"
-              rows="6"
-              name="message"
-              required
-              value={formData.message}
-              onChange={handleChange}
-            />
-          </div>
+          <textarea
+            name="message"
+            placeholder="Additional Details"
+            value={formData.message}
+            onChange={handleChange}
+            required
+          />
 
-          {status === "success" && (
+          {formStatus === "success" && (
             <p className="form-success">Message sent successfully ✅</p>
           )}
 
-          {status === "error" && (
+          {formStatus === "error" && (
             <p className="form-error">
               Something went wrong. Please try again.
             </p>

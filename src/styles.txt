@@ -353,6 +353,7 @@ body{
   line-height: 1.2;
   text-transform: uppercase;
   margin: 0 0 24px 0;
+  margin-bottom: 40px;
 }
 
 .hero-title .accent{
@@ -503,10 +504,11 @@ body{
 /* BLUE ARC AS IMAGE – matches screenshot */
 .blue-arc-img {
   position: absolute;
-  width: 110%;
-  height: 550px;
+  width: 170%;
+  max-width: fit-content;
+  height: 500px;
   left: 50%;
-  bottom: -80px;
+  bottom: 30px;
   transform: translateX(-50%);
   object-fit: contain;
   background-image: url("./assets/blue-arc.png");
@@ -886,6 +888,7 @@ body{
   margin: 32px auto;
   padding: 0 var(--gutter);
   text-align: center;
+  margin-bottom: 170px;
 }
 
 /* container for each roll group (the Figma boxes that read "BRAND ROLL 22" etc) */
@@ -969,279 +972,248 @@ body{
 }
 
 /* ============================
-   Contact page — Figma exact
-   Append/replace contact rules in styles.css
+   CONTACT PAGE – FIGMA EXACT
    ============================ */
 
-/* page wrapper */
+.contact-title {
+  position: relative;
+  z-index: 3;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: clamp(32px, 4vw, 45px);
+  line-height: 10px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.7);
+  margin-top: 200px;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.43);
+}
+
+.contact-subtitle {
+  position: relative;
+  z-index: 3;
+  margin-top: 40px;
+  margin-bottom: 80px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 10px;
+  letter-spacing: 0.17em;
+  color: rgba(0, 0, 0, 0.51);
+}
+
+
+
 .contact-wrapper {
   position: relative;
   width: 100%;
+  min-height: 100vh;
   background: #ffffff;
-  padding: 140px 20px 160px; /* room for big bg text + form */
-  box-sizing: border-box;
-  overflow: visible;
+  padding: clamp(120px, 12vw, 180px) 20px;
+  overflow: hidden;
 }
 
-/* decorative blurred ellipses (3 on large viewport + one bottom) */
-/* these are purely visual & positioned absolute relative to .contact-wrapper */
-.contact-wrapper .contact-blob {
+/* ===== BLUE BLUR ELLIPSES (Exact color) ===== */
+
+.contact-ellipse {
   position: absolute;
   width: 356.5px;
   height: 666px;
-  background: linear-gradient(180deg, #0033FF 0%, #00197f 60%);
+  background: #0229EF;
   filter: blur(250px);
-  border-radius: 50%;
   pointer-events: none;
   z-index: 0;
 }
 
-/* left large blob (Figma: left -161px, top 712px relative to artboard) */
-.contact-wrapper .blob-left-1 { left: -160px; top: 72px; transform: none; }
+/* Ellipse 2 */
+.contact-ellipse.e2 {
+  left: -161px;
+  top: 712px;
+}
 
-/* left top small blob (Figma: left -114px, top -372px) */
-.contact-wrapper .blob-left-2 { left: -114px; top: -372px; transform: none; }
+/* Ellipse 3 */
+.contact-ellipse.e3 {
+  right: -240px;
+  top: 379px;
+  transform: scaleX(-1);
+}
 
-/* right blob mirror (Figma: left 1488px, top 379px with flip) */
-.contact-wrapper .blob-right-1 { right: -120px; top: 40px; transform: scaleX(-1); }
+/* Ellipse 4 */
+.contact-ellipse.e4 {
+  left: -114px;
+  top: -372px;
+  transform: scaleX(-1);
+}
 
-/* right bottom blob (Ellipse 5) */
-.contact-wrapper .blob-right-2 { right: -140px; top: 540px; transform: scaleX(-1); }
+/* Ellipse 5 */
+.contact-ellipse.e5 {
+  right: -240px;
+  bottom: -220px;
+  background: linear-gradient(
+    270deg,
+    #0033FF 0%,
+    #0600AB 50%,
+    #00033D 100%
+  );
+}
 
-/* Large faded background brand text */
-.contact-wrapper .bg-brand {
+/* DOPPELGANG BACKGROUND TEXT — FIGMA ACCURATE */
+
+.contact-bg-brand {
   position: absolute;
-  top: 40px;
+  top: -50px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 0;
+
   font-family: 'Poppins', sans-serif;
   font-weight: 900;
-  font-size: 200px;       /* Figma: 200px */
-  line-height: 300px;
-  letter-spacing: -4px;
+
+  /* Responsive version of 200px */
+  font-size: clamp(96px, 15vw, 200px);
+
+  /* Figma line-height scaled correctly */
+  line-height: 1.5;
+
+  letter-spacing: -3px;
   white-space: nowrap;
   text-transform: uppercase;
   pointer-events: none;
-  color: transparent;
-  background: linear-gradient(171.07deg, rgba(0,51,255,0.20) 37.61%, rgba(0,31,153,0) 86.07%);
+  z-index: 1;
+
+  /* 🎯 EXACT FIGMA GRADIENT */
+  background: linear-gradient(
+    171.07deg,
+    rgba(0, 51, 255, 0.2) 37.61%,
+    rgba(0, 31, 153, 0) 86.07%
+  );
+
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  opacity: 1;
-  filter: blur(0.2px);
 }
 
-/* Contact title & subtitle (kept above bg) */
-.contact-wrapper .section-title.big {
-  position: relative;
-  z-index: 5;
-  margin: 0 auto 6px;
-  font-size: 45px;
-  line-height: 68px;
-  font-weight: 900;
-  color: rgba(0,0,0,0.7);
-  text-align: center;
+
+/* ===== INPUTS & TEXTAREA ===== */
+
+/* FIX CONTACT FORM ALIGNMENT */
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center inputs */
+  gap: 47px;           /* spacing between fields */
+
 }
 
-.contact-wrapper .section-sub {
-  position: relative;
-  z-index: 5;
-  margin: 0 auto 28px;
-  font-size: 20px;
-  font-weight: 500;
-  color: rgba(0,0,0,0.51);
-  letter-spacing: 0.17em;
-  text-transform: none;
-}
 
-/* ===== CENTERED FORM CARD (733px) ===== */
-.contact-card {
-  position: relative;
-  z-index: 6; /* above blobs & bg-brand */
-  width: 733px;                /* exact width from Figma */
-  max-width: calc(100% - 48px);
-  margin: 28px auto 8px auto;
-  padding: 22px;
-  box-sizing: border-box;
-
- 
-  backdrop-filter: none; /* keep subtle */
-  display: block;
-}
-
-/* Individual input frames (exact 57px height) */
-/* We'll style them as single inputs inside the card to match Figma frames */
-.contact-card .form-row {
+.contact-form input,
+.contact-form textarea {
   width: 100%;
-  margin: 20px 0 0 0;
-  color: rgba(0, 0, 0, 0.40);
-font-family: Poppins;
-font-size: 20px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-}
-
-/* single-line inputs */
-.contact-card input[type="text"],
-.contact-card input[type="email"],
-.contact-card input[type="tel"] {
-  box-sizing: border-box;
-  width: 100%;
-  min-width: 733px;              /* Figma: 707px */
-  height: 57px;                      /* exact height */
-  padding: 14px 13px 13px;
-  border-radius: 20px;
-  border: 1px solid rgba(0,0,0,0.6);
-  background: rgba(255,255,255,0.10); /* readable input background */
+  max-width: 733px;
+  margin: 0 auto;
+  padding: 14px;
+  position: relative;
+  border-radius: 10px;
+  border: 1px solid #000;
+  background: rgba(255, 255, 255, 0.1);
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-size: 20px;
-  color: rgba(0,0,0,0.9);
-  outline: none;
-  display: block;
-  line-height: 57px;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  line-height: 30px;
+  color: rgba(0, 0, 0, 0.9);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  
 }
 
-/* placeholder styling to match Figma subtle gray */
-.contact-card input::placeholder {
-  color: rgba(0,0,0,0.40);
-font-family: Poppins;
-font-size: 20px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-width: 100%;
-
-}
-
-/* Big textarea box (Frame 22) */
-.contact-card textarea {
-  box-sizing: border-box;
-  width: 100%;
-  min-width: 733px;              /* Figma: 733px */
-  min-height: 259px;                /* Figma: 259px */
-  padding: 12px 545px 217px 13px;
-  border-radius: 20px;
-  border: 1px solid rgba(0,0,0,0.6);
-  background: rgba(255,255,255,0.10);
+/* EXACT placeholder style — input + textarea */
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
   font-family: 'Poppins', sans-serif;
+  font-weight: 400;
   font-size: 20px;
-  color: rgba(0,0,0,0.9);
+  line-height: 30px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+/* textarea height */
+.contact-form textarea {
+  min-height: 259px;
+  border-radius: 20px;
   resize: vertical;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-}
-
-/* textarea placeholder style */
-.contact-card textarea::placeholder {
-  color: rgba(0,0,0,0.40);
-font-family: Poppins;
-font-size: 20px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-}
-
-/* Submit button wrapper to match absolute placement in Figma (but centered) */
-.contact-card .submit-wrap {
-  margin-top: 18px;
-  text-align: center;
-}
-
-/* Uniform focus highlight for ALL form fields */
-.contact-card input:focus,
-.contact-card textarea:focus {
-  outline: none !important;
-  border-color: #0033FF;
-  box-shadow: 0 0 0 3px rgba(0, 51, 255, 0.25); /* blue glow */
 }
 
 .btn-submit {
-  display: flex;
-  width: calc(100% - -45px);
-  max-width: auto;
-  min-height: 48px;
-  padding: 8px 0 7px 0;
-  justify-content: center;
-  align-items: center;
-  margin-top: 18px;
+  width: 100%;
+  max-width: 733px;
+  height: 51px;
+
+  background: linear-gradient(
+    270deg,
+    #0033FF 0%,
+    #0600AB 50%,
+    #00033D 100%
+  );
 
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.43);
-
-  /* Default horizontal gradient */
-  background: linear-gradient(90deg, #021650 0%, #0033FF 100%);
-
-  backdrop-filter: blur(30px);
+  border: none;
   cursor: pointer;
 
-  /* Text */
-  color: #ffffff;
-  font-family: "Poppins", sans-serif;
-  font-size: clamp(18px, 4vw, 24px);
+  font-family: 'Poppins', sans-serif;
   font-weight: 500;
-  text-transform: uppercase;
+  font-size: 24px;
+  color: #ffffff;
 
-  /* Quick transition */
-  transition: background 0.3s ease, transform 0.2s ease;
+
+  /* Required for animation */
+  background-size: 100% 200%;
+  background-position: top;
+
+  transition: transform 0.2s ease;
 }
 
-/* Hover state */
+
 .btn-submit:hover {
-  background: linear-gradient(180deg, #011143 0%, #0033FF 100%);
+  background-image: linear-gradient(
+    180deg,
+    #000016 0%,     /* 🔥 EXTRA DARK TOP */
+    #00033D 25%,    /* dark DG blue */
+    #0600AB 55%,    /* mid DG blue */
+    #0033FF 100%    /* light bottom */
+  );
+
+  animation: gradientFlow 0.6s ease forwards;
 }
 
-/* Click effect */
+
 .btn-submit:active {
-  transform: translateY(-2px);
+  transform: translateY(1px);
 }
 
-@media (max-width: 900px) {
-  .btn-submit {
-    width: calc(100% - 30px);
-    font-size: clamp(16px, 3.5vw, 20px);
+@keyframes gradientFlow {
+  0% {
+    background-position: top;
   }
-}
-
-@media (max-width: 600px) {
-  .btn-submit {
-    width: calc(100% - 26px);
-    font-size: clamp(14px, 3vw, 18px);
-    padding: 6px 0 5px 0;
+  100% {
+    background-position: bottom;
   }
 }
 
 
-/* Contact details below the card */
-.contact-details {
-  margin: 18px auto 0;
-  max-width: 760px;
-  z-index: 6;
-  text-align: center;
-  color: rgba(0,0,0,0.8);
-  font-weight: 600;
-  line-height: 1.6;
+@media (max-width: 768px) {
+  .contact-bg-brand {
+    font-size: 110px;
+    top: 40px;
+    display: none;
+  }
+
+    .contact-title {
+    margin-top: 40px;
+  }
+  .contact-ellipse {
+    display: none;
+  }
 }
 
-/* small responsive adjustments to match mobile view */
-@media (max-width: 920px) {
-  .contact-wrapper { padding: 80px 18px 120px; }
-  .contact-wrapper .bg-brand { font-size: 120px; line-height: 160px; left: 50%; transform: translateX(-50%); top: 10px; }
-  .contact-card { width: 92%; padding: 15px; border-radius: 10px; }
-  .contact-card input[type="text"],
-  .contact-card input[type="email"],
-  .contact-card input[type="tel"] { height: 50px; font-size: 18px; }
-  .contact-card textarea { min-height: 180px; font-size: 16px; }
-  .btn-submit { height: 48px; font-size: 20px; }
-  .contact-wrapper .contact-blob { display: none; } /* hide heavy blurs on mobile for perf */
-}
-
-@media (max-width: 480px) {
-  .contact-wrapper .bg-brand { display: none; } /* hide huge background text on small phones */
-  .contact-details { padding: 0 12px; font-size: 14px; }
-}
 
 
 /* ---------- Footer: 3-column layout like screenshot ---------- */
@@ -1251,6 +1223,7 @@ line-height: normal;
   padding: 56px 0 72px;
   border-top: 1px solid rgba(2,8,25,0.03);
   box-sizing: border-box;
+  margin-top: 80px; /* ⬇ pushes footer downward */
 }
 
 /* grid container that centers content and creates three columns */
@@ -1261,7 +1234,8 @@ line-height: normal;
   display: grid;
   grid-template-columns: 1fr 420px 1fr; /* left / center / right */
   gap: 40px;
-  align-items: start;
+  align-items: flex-start;
+  min-height: 240px;
 }
 
 /* ---------- Left: Brand + Social ---------- */
@@ -1382,7 +1356,7 @@ line-height: normal;
   font-weight: 200;
 }
 
-.footer-contact .contact-title {
+.footer-contact .contact-title-footer {
   font-size: 20px;
   font-weight: 900;
   text-transform: uppercase;
@@ -1417,10 +1391,12 @@ line-height: normal;
 
 /* ---------- Footer bottom tiny copyright row (optional) ---------- */
 .footer-bottom {
-  margin-top: 28px;
+  margin-top: 60px;
+  padding-top:  20px;
   text-align: center;
   font-size: 13px;
   color: #6b7280;
+
 }
 
 /* ---------- Responsive: stack columns under 980px ---------- */
@@ -1473,7 +1449,7 @@ html {
   margin: 200px auto 0 auto;   /* ✅ Increased top margin to prevent collision with blue arc */
   padding: 0 var(--gutter);
   color: #000;
-  padding-top: 60px;           /* ✅ Added top padding for breathing room */
+  padding-top: -10px;           /* ✅ Added top padding for breathing room */
 }
 
 @media (max-width: 1200px) {

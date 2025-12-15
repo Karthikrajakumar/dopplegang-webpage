@@ -49,7 +49,7 @@ export default function Footer() {
 
     
     <div class="footer-contact" aria-label="Contact details">
-  <div class="contact-title">OUR DETAILS</div>
+  <div class="contact-title-footer">OUR DETAILS</div>
 
   <div class="contact-item">
     <div class="ci-icon">
