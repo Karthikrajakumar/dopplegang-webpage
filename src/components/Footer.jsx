@@ -36,7 +36,7 @@ export default function Footer() {
   </a>
 </div>
 </div>
-
+ 
     <div class="footer-nav" aria-label="Footer navigation">
       <div class="nav-title">OUR PAGE</div>
       <ul>

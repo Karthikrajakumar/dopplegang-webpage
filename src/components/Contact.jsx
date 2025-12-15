@@ -23,6 +23,7 @@ export default function Contact() {
     e.preventDefault();
     setLoading(true);
     setStatus(null);
+    
 
     try {
       const res = await fetch(
@@ -80,6 +81,7 @@ export default function Contact() {
               type="text"
               placeholder="Your Name"
               name="name"
+              required
               value={formData.name}
               onChange={handleChange}
             />
@@ -90,6 +92,7 @@ export default function Contact() {
               type="email"
               placeholder="Your Email"
               name="email"
+              required
               value={formData.email}
               onChange={handleChange}
             />
@@ -100,6 +103,7 @@ export default function Contact() {
               type="text"
               placeholder="Your Number"
               name="phone"
+              required
               value={formData.phone}
               onChange={handleChange}
             />
@@ -110,6 +114,7 @@ export default function Contact() {
               placeholder="Additional Details"
               rows="6"
               name="message"
+              required
               value={formData.message}
               onChange={handleChange}
             />
